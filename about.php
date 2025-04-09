@@ -18,94 +18,239 @@ $page_title = 'About Us';
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary-blue: #007bff;
-            --dark-blue: #0056b3;
-            --light-blue: #e7f1ff;
-            --hover-blue: #0069d9;
-        }
+    :root {
+        --primary-blue: #007bff;
+        --dark-blue: #0056b3;
+        --light-blue: #e7f1ff;
+        --hover-blue: #0069d9;
+        --accent-blue: #4dabf7;
+        --shadow-blue: rgba(0, 123, 255, 0.15);
+        --text-dark: #1a2b45;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            margin-left: 40 px;
-        }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+    }
 
-        .navbar {
-            background: linear-gradient(to right, var(--primary-blue), var(--dark-blue));
-            box-shadow: 0 2px 15px rgba(0, 123, 255, 0.3);
-            padding: 1rem 0;
-        }
+    /* Add subtle background pattern */
+    body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 10%, transparent 10%);
+        background-size: 30px 30px;
+        opacity: 0.3;
+        z-index: -1;
+    }
 
-        .navbar-brand {
-            font-weight: 600;
-            font-size: 1.5rem;
-            color: white !important;
-            transition: transform 0.3s ease;
-        }
+    .navbar {
+        background: linear-gradient(45deg, var(--primary-blue), var(--dark-blue));
+        box-shadow: 0 4px 25px var(--shadow-blue);
+        padding: 1.2rem 0;
+        position: relative;
+        overflow: hidden;
+    }
 
-        .navbar-brand:hover {
-            transform: scale(1.05);
-        }
+    /* Navbar shine effect */
+    .navbar::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            to right,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent
+        );
+        transform: rotate(30deg);
+        animation: shine 6s infinite;
+    }
 
-        .nav-link {
-            color: rgba(255, 255, 255, 0.9) !important;
-            padding: 0.5rem 1rem !important;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
+    @keyframes shine {
+        0% { transform: translateX(-100%) rotate(30deg); }
+        50% { transform: translateX(100%) rotate(30deg); }
+        100% { transform: translateX(-100%) rotate(30deg); }
+    }
 
-        .nav-link:hover {
-            color: white !important;
-            background: var(--hover-blue);
-        }
+    .navbar-brand {
+        font-weight: 700;
+        font-size: 1.7rem;
+        color: white !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+        position: relative;
+    }
 
-        .main-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0, 123, 255, 0.1);
-            padding: 2rem;
-            margin: 2rem 0;
-        }
+    .navbar-brand:hover {
+        transform: scale(1.05) rotate(2deg);
+        color: var(--light-blue) !important;
+    }
 
-        .btn-custom {
-            background: var(--primary-blue);
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            color: white;
-            transition: all 0.3s ease;
-        }
+    .nav-link {
+        color: rgba(255, 255, 255, 0.95) !important;
+        padding: 0.6rem 1.2rem !important;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+    }
 
-        .btn-custom:hover {
-            background: var(--dark-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
-        }
+    .nav-link:hover {
+        color: white !important;
+        background: var(--hover-blue);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+    }
 
-        .about-section {
-            padding: 3rem 0;
-        }
+    /* Nav link hover effect */
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--light-blue);
+        transform: scaleX(0);
+        transform-origin: bottom right;
+        transition: transform 0.3s ease-out;
+    }
 
-        .team-card {
-            border: none;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
+    .nav-link:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
 
-        .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.2);
-        }
+    .main-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 8px 30px var(--shadow-blue);
+        padding: 2.5rem;
+        margin: 2.5rem 0;
+        position: relative;
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
-        .team-img {
-            height: 200px;
-            object-fit: cover;
-        }
-    </style>
+    /* Main container subtle animation */
+    .main-container::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, var(--primary-blue), var(--accent-blue));
+        border-radius: 22px;
+        z-index: -1;
+        opacity: 0.2;
+        animation: gradientPulse 4s infinite;
+    }
+
+    @keyframes gradientPulse {
+        0% { opacity: 0.2; }
+        50% { opacity: 0.4; }
+        100% { opacity: 0.2; }
+    }
+
+    .btn-custom {
+        background: linear-gradient(45deg, var(--primary-blue), var(--accent-blue));
+        border: none;
+        padding: 0.8rem 1.8rem;
+        border-radius: 30px;
+        color: white;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-custom:hover {
+        background: var(--dark-blue);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+        color: white;
+    }
+
+    /* Button ripple effect */
+    .btn-custom::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: width 0.6s ease, height 0.6s ease;
+    }
+
+    .btn-custom:hover::after {
+        width: 300px;
+        height: 300px;
+    }
+
+    .about-section {
+        padding: 2rem 0;
+        position: relative;
+    }
+
+    .team-card {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        background: white;
+        position: relative;
+    }
+
+    .team-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0, 123, 255, 0.25);
+    }
+
+    .team-img {
+        height: 220px;
+        object-fit: cover;
+        transition: all 0.3s ease;
+    }
+
+    .team-card:hover .team-img {
+        transform: scale(1.05);
+    }
+
+    /* Additional text styling */
+    h1, h2, h5 {
+        color: var(--text-dark);
+        position: relative;
+    }
+
+    h1::after, h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        width: 60px;
+        height: 3px;
+        background: var(--primary-blue);
+        transform: translateX(-50%);
+        border-radius: 2px;
+    }
+</style>
 </head>
 <body>
     <header>
