@@ -133,16 +133,21 @@ $conn->close();
                                     </td>
                                     <td><?php echo format_date($post['created_at']); ?></td>
                                     <td>
-                                        <a href="edit-post.php?id=<?php echo $post['id']; ?>" class="btn btn-sm btn-primary">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <a href="<?php echo SITE_URL; ?>/single-post.php?id=<?php echo $post['id']; ?>" target="_blank" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <a href="delete-post.php?id=<?php echo $post['id']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
+    <a href="edit-post.php?id=<?php echo $post['id']; ?>" class="btn btn-sm btn-primary" title="Edit">
+        <i class="bi bi-pencil"></i>
+    </a>
+    <a href="<?php echo SITE_URL; ?>/single-post.php?id=<?php echo $post['id']; ?>" target="_blank" class="btn btn-sm btn-info" title="View">
+        <i class="bi bi-eye"></i>
+    </a>
+    <?php if ($post['status'] === 'draft'): ?>
+    <a href="publish-post.php?id=<?php echo $post['id']; ?>" class="btn btn-sm btn-success" title="Publish" onclick="return confirm('Are you sure you want to publish this post?')">
+        <i class="bi bi-arrow-up-square"></i>
+    </a>
+    <?php endif; ?>
+    <a href="delete-post.php?id=<?php echo $post['id']; ?>" class="btn btn-sm btn-danger" title="Delete" onclick="return confirm('Are you sure you want to delete this post?')">
+        <i class="bi bi-trash"></i>
+    </a>
+</td>
                                 </tr>
                                 <?php endforeach; ?>
                             </tbody>

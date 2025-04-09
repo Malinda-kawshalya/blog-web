@@ -71,4 +71,42 @@ function upload_image($file) {
     } else {
         return ['success' => false, 'message' => "Sorry, there was an error uploading your file."];
     }
+
+    // create post
+    function create_post($title, $content, $user_id, $status = 'published') {
+        global $pdo;
+        
+        try {
+            // Extract excerpt from content (first 150 characters)
+            $excerpt = substr(strip_tags($content), 0, 150);
+            if (strlen(strip_tags($content)) > 150) {
+                $excerpt .= '...';
+            }
+            
+            $stmt = $pdo->prepare("INSERT INTO posts (title, content, excerpt, user_id, status, created_at) 
+                                  VALUES (?, ?, ?, ?, ?, NOW())");
+                                  
+            $stmt->execute([$title, $content, $excerpt, $user_id, $status]);
+            
+            return $pdo->lastInsertId();
+        } catch (PDOException $e) {
+            // Log error
+            error_log("Database error: " . $e->getMessage());
+            return false;
+        }
+    }
+    function count_comments($post_id) {
+        global $pdo; // Use the global PDO connection
+        try {
+            $stmt = $pdo->prepare("SELECT COUNT(*) AS total_comments FROM comments WHERE post_id = ?");
+            $stmt->execute([$post_id]);
+            $result = $stmt->fetch();
+            return $result['total_comments'];
+        } catch (PDOException $e) {
+            error_log("Error counting comments: " . $e->getMessage());
+            return 0; // Return 0 if there's an error
+        }
+    }
+
+    
 }
