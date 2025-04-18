@@ -108,5 +108,27 @@ function upload_image($file) {
         }
     }
 
+    // Get comments for a post
+function get_comments_by_post($post_id) {
+    $post_id = (int)$post_id;
+    $sql = "SELECT comments.*, users.username 
+            FROM comments 
+            JOIN users ON comments.user_id = users.id 
+            WHERE comments.post_id = $post_id 
+            AND comments.status = 'approved' 
+            ORDER BY comments.created_at ASC";
+    
+    $result = db_query($sql);
+    $comments = [];
+    
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $comments[] = $row;
+        }
+    }
+    
+    return $comments;
+}
+
     
 }

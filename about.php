@@ -322,27 +322,24 @@ $page_title = 'About Us';
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <div class="team-card bg-white">
-                        <img src="<?php echo SITE_URL; ?>/assets/images/team1.jpg" class="w-100 team-img" alt="Team Member">
                         <div class="p-3">
-                            <h5 class="fw-semibold">John Doe</h5>
+                            <h5 class="fw-semibold">Sithum</h5>
                             <p class="text-muted small">Founder & Editor</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="team-card bg-white">
-                        <img src="<?php echo SITE_URL; ?>/assets/images/team2.jpg" class="w-100 team-img" alt="Team Member">
                         <div class="p-3">
-                            <h5 class="fw-semibold">Jane Smith</h5>
+                            <h5 class="fw-semibold">shenara</h5>
                             <p class="text-muted small">Content Creator</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="team-card bg-white">
-                        <img src="<?php echo SITE_URL; ?>/assets/images/team3.jpg" class="w-100 team-img" alt="Team Member">
                         <div class="p-3">
-                            <h5 class="fw-semibold">Mike Johnson</h5>
+                            <h5 class="fw-semibold">Matheesha</h5>
                             <p class="text-muted small">Web Developer</p>
                         </div>
                     </div>

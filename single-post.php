@@ -35,22 +35,23 @@ if (isset($_GET['id'])) {
     // Fetch comments if post exists
     if (isset($post)) {
         $comment_sql = "SELECT c.*, u.username 
-        FROM comments c
-        JOIN users u ON c.user_id = u.id
-        WHERE c.post_id = ? AND c.status = 'approved'
-        ORDER BY c.created_at DESC";
-$comment_stmt = $conn->prepare($comment_sql);
-$comment_stmt->bind_param("i", $post_id);
-$comment_stmt->execute();
-$comments_result = $comment_stmt->get_result();
-$comments = [];
-
-while ($comment = $comments_result->fetch_assoc()) {
-$comments[] = $comment;
-}
-        
+                        FROM comments c
+                        JOIN users u ON c.user_id = u.id
+                        WHERE c.post_id = ?
+                        ORDER BY c.created_at DESC";
+        $comment_stmt = $conn->prepare($comment_sql);
+        $comment_stmt->bind_param("i", $post_id);
+        $comment_stmt->execute();
+        $comments_result = $comment_stmt->get_result();
+        $comments = [];
+    
+        while ($comment = $comments_result->fetch_assoc()) {
+            $comments[] = $comment;
+        }
+    
         $comment_stmt->close();
     }
+}
     
     // Fetch categories
     $categories_sql = "SELECT name, COUNT(*) as post_count 
@@ -82,11 +83,12 @@ $comments[] = $comment;
             $recent_posts[] = $recent;
         }
     }
-    
+    else {
+        $error_message = 'No post specified';
+    }
     $conn->close();
-} else {
-    $error_message = 'No post specified';
-}
+ 
+
 
 // Include header
 require_once 'includes/header.php';
